@@ -31,7 +31,7 @@ local function worker(args)
 		layout = wibox.container.margin(brightness_icon, 0, 0, 2),
 	})
 	-- Settings
-	local timeout = args.timeout or 5
+	local timeout = args.timeout or 3
 	local onclick = args.onclick
 	local showconnected = args.showconnected or true
 

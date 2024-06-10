@@ -126,7 +126,7 @@ mytextclock = wibox.widget.textclock()
 
 --Calendar widget
 local cw = calendar_widget({
-	theme = "dark",
+	theme = "nord",
 	placement = "top_right",
 	radius = 8,
 })
@@ -137,7 +137,7 @@ mytextclock:connect_signal("button::press", function(_, _, _, button)
 end)
 
 --Check internet connection
-net_internet = net_widgets.internet({ indent = 0, timeout = 5 })
+net_internet = net_widgets.internet({ indent = 0, timeout = 3 })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -200,7 +200,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
 	--Toggle systray
 	s.systray = wibox.widget.systray()
-	s.systray.visible = false
+	s.systray.visible = true
 
 	-- Wallpaper
 	set_wallpaper(s)
@@ -259,32 +259,30 @@ awful.screen.connect_for_each_screen(function(s)
 			--
 			cpu_widget({
 				enable_kill_button = true,
-				step_width = 1,
 			}),
 			temperature_widget,
 			net_internet,
-			wibox.widget.textbox("|  "),
 			fs_widget(),
 			volume_widget({
 				card = 0,
 				step = 2,
+				widget_type = "arc",
 			}),
 			brightness_widget({
 				program = "brightnessctl",
-				type = "icon_and_text",
+				type = "arc",
 				step = 1,
-				base = 3,
-				percentage = true,
+				base = 10,
 			}),
 			--
 			--mykeyboardlayout,
-			s.systray,
-			wibox.widget.textbox("  |  "),
 			batteryarc_widget({
 				show_current_level = true,
 				size = 30,
 				show_notification_mode = "off",
 			}),
+			s.systray,
+			wibox.widget.textbox("  |  "),
 			mytextclock,
 			logout_menu(),
 			-- s.mylayoutbox,

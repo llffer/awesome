@@ -1,13 +1,3 @@
--------------------------------------------------
--- Battery Arc Widget for Awesome Window Manager
--- Shows the battery level of the laptop
--- More details could be found here:
--- https://github.com/streetturtle/awesome-wm-widgets/tree/master/batteryarc-widget
-
--- @author Pavel Makhov
--- @copyright 2020 Pavel Makhov
--------------------------------------------------
-
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
@@ -26,7 +16,7 @@ local function worker(user_args)
 	local arc_thickness = args.arc_thickness or 2
 	local show_current_level = args.show_current_level or false
 	local size = args.size or 18
-	local timeout = args.timeout or 10
+	local timeout = args.timeout or 5
 	local show_notification_mode = args.show_notification_mode or "on_hover" -- on_hover / on_click
 	local notification_position = args.notification_position or "top_right" -- see naughty.notify position argument
 
@@ -76,7 +66,7 @@ local function worker(user_args)
 			icon_size = 100,
 			text = warning_msg_text,
 			title = warning_msg_title,
-			timeout = 25, -- show the warning for a longer time
+			timeout = 15, -- show the warning for a longer time
 			hover_timeout = 0.5,
 			position = warning_msg_position,
 			bg = "#F06060",

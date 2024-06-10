@@ -22,7 +22,7 @@ globalkeys = gears.table.join(
 	awful.key({}, "XF86AudioMute", function()
 		volume_widget.toggle()
 	end),
-	--
+	--Brightness
 	awful.key({}, "XF86MonBrightnessUp", function()
 		brightness_widget:inc()
 	end, { description = "increase brightness", group = "custom" }),
@@ -46,7 +46,7 @@ globalkeys = gears.table.join(
 	awful.key({ "Control", modkey }, "p", function()
 		awful.util.spawn("pavucontrol")
 	end, { description = "Audio Settings", group = "launcher" }),
-	--
+
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),

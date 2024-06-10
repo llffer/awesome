@@ -1,12 +1,3 @@
--------------------------------------------------
--- Logout Menu Widget for Awesome Window Manager
--- More details could be found here:
--- https://github.com/streetturtle/awesome-wm-widgets/tree/master/logout-menu-widget
-
--- @author Pavel Makhov
--- @copyright 2020 Pavel Makhov
--------------------------------------------------
-
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
@@ -60,9 +51,10 @@ local function worker(user_args)
 	local onreboot = args.onreboot or function()
 		awful.spawn.with_shell("reboot")
 	end
-	local onsuspend = args.onsuspend or function()
-		awful.spawn.with_shell("systemctl suspend")
-	end
+	local onsuspend = args.onsuspend
+		or function()
+			awful.spawn.with_shell("nmcli radio wifi off && systemctl suspend")
+		end
 	local onpoweroff = args.onpoweroff or function()
 		awful.spawn.with_shell("shutdown now")
 	end
