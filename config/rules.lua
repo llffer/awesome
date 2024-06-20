@@ -75,11 +75,11 @@ awful.rules.rules = {
 	},
 	{
 		rule = { class = "steam" },
-		properties = { tag = "3", floating = false },
+		properties = { tag = "3", floating = true, width = 400, height = 400 },
 	},
 	{
 		rule = { class = "zoom" },
-		properties = { tag = "4", floating = false },
+		properties = { tag = "4", floating = false, maximixed = true },
 	},
 }
 -- }}}

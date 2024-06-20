@@ -136,8 +136,8 @@ mytextclock:connect_signal("button::press", function(_, _, _, button)
 	end
 end)
 
---Check internet connection
-net_internet = net_widgets.internet({ indent = 0, timeout = 3 })
+--Internet connection
+net_indicator = net_widgets.indicator({ interfaces = { "eth0", "wlo1" }, timeout = 3 })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -261,7 +261,7 @@ awful.screen.connect_for_each_screen(function(s)
 				enable_kill_button = true,
 			}),
 			temperature_widget,
-			net_internet,
+			net_indicator,
 			fs_widget(),
 			volume_widget({
 				card = 0,
