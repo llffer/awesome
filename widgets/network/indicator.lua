@@ -18,7 +18,7 @@ local function worker(args)
   -- Settings
   local interfaces = args.interfaces
   local ignore_interfaces = args.ignore_interfaces or {}
-  local ICON_DIR = awful.util.getdir("config").."/"..module_path.."/widgets/net_widgets/icons/"
+  local ICON_DIR = awful.util.getdir("config").."/"..module_path.."/widgets/network/icons/"
   local timeout = args.timeout or 10
   local font = args.font or beautiful.font
   local onclick = args.onclick
@@ -57,7 +57,7 @@ local function worker(args)
     --    noqueue state DOWN mode DEFAULT group default \    link/ether
     --    02:42:68:08:88:34 brd ff:ff:ff:ff:ff:ff
     local ipl_pattern = "^%d+:%s+([^%s]+):%s+<.*>%s.*%s" ..
-        "state%s+([^%s]+)%s.*%slink/([^%s]+)[%s]*([%x:]*)"
+    "state%s+([^%s]+)%s.*%slink/([^%s]+)[%s]*([%x:]*)"
     local f = io.popen("ip -oneline link show")
     for line in f:lines() do
       local iface, state, type_, mac = string.match(line, ipl_pattern)
@@ -313,14 +313,14 @@ local function worker(args)
       -- Show IP and MAC addresses
       for a = 1, #s.addrs - 1 do
         msg = msg .. "├ADDR:\t" .. s.addrs[a].addr ..
-              " (" .. s.addrs[a].type_ .. ")\n"
+        " (" .. s.addrs[a].type_ .. ")\n"
       end
       if (args.skiproutes) then
         msg = msg .. "└ADDR:\t" .. s.addrs[#s.addrs].addr ..
-              " (" .. s.addrs[#s.addrs].type_ .. ")</span>\n"
+        " (" .. s.addrs[#s.addrs].type_ .. ")</span>\n"
       else
         msg = msg .. "├ADDR:\t" .. s.addrs[#s.addrs].addr ..
-              " (" .. s.addrs[#s.addrs].type_ .. ")\n"
+        " (" .. s.addrs[#s.addrs].type_ .. ")\n"
       end
 
       -- Grab route information
@@ -385,18 +385,18 @@ local function worker(args)
     widget:hide()
 
     notification = naughty.notify({
-        preset = fs_notification_preset,
-        text = text_grabber(),
-        timeout = t_out,
-        screen = mouse.screen,
-        position = popup_position
-      })
+      preset = fs_notification_preset,
+      text = text_grabber(),
+      timeout = t_out,
+      screen = mouse.screen,
+      position = popup_position
+    })
   end
 
   -- Bind onclick event function
   if onclick then
     widget:buttons(awful.util.table.join(
-        awful.button({}, 1, function() awful.util.spawn(onclick) end)
+      awful.button({}, 1, function() awful.util.spawn(onclick) end)
     ))
   end
 

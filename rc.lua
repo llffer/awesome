@@ -7,12 +7,10 @@ pcall(require, "luarocks.loader")
 local volume_widget = require("widgets.volume-widget.volume")
 local brightness_widget = require("widgets.brightness-widget.brightness")
 local batteryarc_widget = require("widgets.batteryarc-widget.batteryarc")
-local cpu_widget = require("widgets.cpu-widget.cpu-widget")
 local calendar_widget = require("widgets.calendar-widget.calendar")
 local logout_menu = require("widgets.logout-menu-widget.logout-menu")
 local temperature_widget = require("widgets.temperature")
-local net_widgets = require("widgets.net_widgets")
-local fs_widget = require("widgets.fs-widget.fs-widget")
+local network = require("widgets.network")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -38,7 +36,7 @@ require("config.error-handling")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/default/theme.lua")
+beautiful.init("~/.config/awesome/theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "qterminal"
@@ -137,7 +135,7 @@ mytextclock:connect_signal("button::press", function(_, _, _, button)
 end)
 
 --Internet connection
-net_indicator = net_widgets.indicator({ interfaces = { "eth0", "wlo1" }, timeout = 3 })
+net_indicator = network.indicator({ interfaces = { "eth0", "wlo1" }, timeout = 3 })
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -257,12 +255,8 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			--
-			cpu_widget({
-				enable_kill_button = true,
-			}),
 			temperature_widget,
 			net_indicator,
-			fs_widget(),
 			volume_widget({
 				card = 0,
 				step = 2,
@@ -282,7 +276,6 @@ awful.screen.connect_for_each_screen(function(s)
 				show_notification_mode = "off",
 			}),
 			s.systray,
-			wibox.widget.textbox("  |  "),
 			mytextclock,
 			logout_menu(),
 			-- s.mylayoutbox,
